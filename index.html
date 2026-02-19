@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OISHII | The Asian Cuisine | Tura Meghalaya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+.logo{width:180px;margin-bottom:15px;}
+body{background:#faf7f2;overflow-x:hidden;}
+.dark{background:#111;color:#fff;}
+
+header{
+height:85vh;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1553621042-f6e147245754") center/cover;
+display:flex;align-items:center;justify-content:center;
+text-align:center;color:white;
+}
+header h1{font-size:3rem;}
+header p{margin-top:10px;font-size:1.2rem;}
+header button{
+margin-top:20px;padding:12px 25px;border:none;
+background:#e63946;color:white;cursor:pointer;
+border-radius:5px;font-size:1rem;
+}
+
+nav{
+background:#111;padding:15px;text-align:center;
+position:sticky;top:0;z-index:999;
+}
+nav a{color:white;margin:0 15px;text-decoration:none;}
+nav button{margin-left:15px;padding:5px 10px;cursor:pointer;}
+
+section{padding:60px 10%;}
+.section-title{text-align:center;font-size:2rem;margin-bottom:30px;}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.menu-item{
+background:white;padding:20px;border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center;
+}
+.menu-item img{
+width:100%;height:160px;object-fit:cover;
+border-radius:8px;margin-bottom:10px;
+}
+.menu-item h3{margin-bottom:5px;font-size:1.1rem;}
+.price{font-weight:600;margin-bottom:10px;color:#e63946;}
+.dark .menu-item{background:#1a1a1a;}
+
+/* RESERVATION POPUP */
+.cart{
+position:fixed;top:0;right:-100%;
+width:85%;max-width:360px;height:100vh;
+background:#111;color:white;padding:25px;
+transition:0.4s;z-index:2000;
+box-shadow:-5px 0 25px rgba(0,0,0,0.6);
+border-top-left-radius:20px;border-bottom-left-radius:20px;
+}
+.cart.active{right:0;}
+.cart h2{margin-bottom:15px;}
+.cart input{width:100%;padding:10px;margin-bottom:10px;border-radius:6px;border:none;}
+.cart button.checkout-btn{width:100%;padding:12px;background:#e63946;border:none;color:white;border-radius:10px;cursor:pointer;}
+.close-cart{position:absolute;top:15px;right:20px;font-size:22px;cursor:pointer;color:#ff4d4d;}
+
+footer{background:#111;color:white;text-align:center;padding:20px;margin-top:40px;}
+
+.sakura{position:fixed;top:-10px;font-size:20px;animation:fall linear infinite;}
+@keyframes fall{to{transform:translateY(100vh) rotate(360deg);}}
+</style>
+</head>
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/916033091243" 
+   target="_blank" 
+   style="
+   position:fixed;
+   bottom:20px;
+   right:20px;
+   background:#25D366;
+   color:white;
+   padding:15px 18px;
+   border-radius:50px;
+   font-size:18px;
+   text-decoration:none;
+   box-shadow:0 4px 10px rgba(0,0,0,0.3);
+   z-index:1000;">
+   💬 WhatsApp
+   <a href="tel:+916033091243"
+style="
+display:inline-block;
+background:#28a745;
+color:white;
+padding:12px 20px;
+text-decoration:none;
+margin:10px;">
+📞 Call Now
+</a>
+<body>
+
+<header>
+<div>
+<img src="images/logo.png" class="logo">
+<h1>OISHII</h1>
+<p>The Asian Cuisine</p>
+<p id="status" style="margin-top:10px;font-weight:600;"></p>
+<button onclick="openReservation()">Reserve Table</button>
+</div>
+</header>
+
+<nav>
+<a href="#menu">Menu</a>
+<a href="#location">Location</a>
+<a href="#contact">Contact</a>
+<a href="#hours">Hours</a>
+<button onclick="toggleDark()">🌙</button>
+</nav>
+
+<section id="menu">
+<h2 class="section-title">Our Menu</h2>
+<div class="menu-grid">
+
+<!-- ORIGINAL FULL MENU ITEMS (buttons removed) -->
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+<h3>Yasai Tempura</h3>
+<p class="price">₹160</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1553621042-f6e147245754">
+<h3>Ebi Tempura</h3>
+<p class="price">₹300</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<h3>Tempura Moriawase</h3>
+<p class="price">₹330</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252">
+<h3>Yakitori</h3>
+<p class="price">₹340</p>
+</div>
+
+<div class="menu-item">
+<img src="images/tori-karaage.jpg">
+<h3>Tori Karaage</h3>
+<p class="price">₹340</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1553621042-f6e147245754">
+<h3>Shoga Yaki</h3>
+<p class="price">₹350</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?q=80&w=1200&auto=format&fit=crop">
+<h3>Salmon Nigiri</h3>
+<p class="price">₹480</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1553621042-f6e147245754">
+<h3>Ebi Nigiri</h3>
+<p class="price">₹370</p>
+</div>
+
+<div class="menu-item">
+<img src="images/kanikama-nigiri.jpg">
+<h3>Kanikama Nigiri</h3>
+<p class="price">₹450</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351">
+<h3>Kappamaki</h3>
+<p class="price">₹270</p>
+</div>
+
+<div class="menu-item">
+<img src="images/tamago-maki.jpg">
+<h3>Tamago Maki</h3>
+<p class="price">₹270</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc">
+<h3>Ebi Tempura Maki</h3>
+<p class="price">₹340</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246">
+<h3>Shoyu Ramen</h3>
+<p class="price">₹390</p>
+</div>
+
+<div class="menu-item">
+<img src="images/tonkotsu-ramen.jpg">
+<h3>Tonkotsu Ramen</h3>
+<p class="price">₹420</p>
+</div>
+
+<div class="menu-item">
+<img src="images/vegetable-udon.jpg">
+<h3>Vegetable Udon</h3>
+<p class="price">₹350</p>
+</div>
+
+<div class="menu-item">
+<img src="images/chicken-bentobox.jpg">
+<h3>Chicken Bento Box</h3>
+<p class="price">₹550</p>
+</div>
+
+<div class="menu-item">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+<h3>Salmon Bento Box</h3>
+<p class="price">₹650</p>
+</div>
+
+<div class="menu-item">
+<img src="images/mochi-icecream.jpg">
+<h3>Mochi Ice Cream</h3>
+<p class="price">₹220</p>
+</div>
+
+<div class="menu-item">
+<img src="images/matcha-icecream.jpg">
+<h3>Matcha Ice Cream</h3>
+<p class="price">₹200</p>
+</div>
+
+<div class="menu-item">
+<img src="images/japanese-greentea.jpg">
+<h3>Japanese Green Tea</h3>
+<p class="price">₹120</p>
+</div>
+
+<div class="menu-item">
+<img src="images/ramune-soda.jpg">
+<h3>Ramune Soda</h3>
+<p class="price">₹180</p>
+</div>
+
+</div>
+</section>
+
+<section id="location">
+<h2 class="section-title">Find Us</h2>
+<iframe width="100%" height="300" style="border:0"
+src="https://www.google.com/maps?q=OISHII%20Dakopgre%20Road%20Matchakol%20Tura%20Meghalaya&output=embed">
+</iframe>
+</section>
+
+<section id="contact">
+<h2 class="section-title">Contact</h2>
+<center>
+<p><strong>Phone:</strong> 6033091243</p>
+<p>Dakopgre Road, Tura, Meghalaya</p>
+</center>
+</section>
+
+<section id="hours">
+<h2 class="section-title">Opening Hours</h2>
+<center>
+<p><strong>Monday – Saturday:</strong> 10:30 AM – 8:30 PM</p>
+<p><strong>Sunday:</strong> Closed</p>
+</center>
+</section>
+
+<footer>
+© 2026 OISHII | The Asian Cuisine
+</footer>
+
+<!-- RESERVATION POPUP -->
+<div class="cart" id="reservation">
+<span class="close-cart" onclick="closeReservation()">✕</span>
+<h2>Reserve a Table</h2>
+<input type="text" id="resName" placeholder="Your Name">
+<input type="tel" id="resPhone" placeholder="Phone Number">
+<input type="date" id="resDate">
+<input type="time" id="resTime">
+<input type="number" id="resGuests" placeholder="Number of Guests">
+<button class="checkout-btn" onclick="sendReservation()">Confirm Reservation</button>
+</div>
+
+<script>
+function openReservation(){document.getElementById("reservation").classList.add("active");}
+function closeReservation(){document.getElementById("reservation").classList.remove("active");}
+function sendReservation(){
+let name=document.getElementById("resName").value;
+let phone=document.getElementById("resPhone").value;
+let date=document.getElementById("resDate").value;
+let time=document.getElementById("resTime").value;
+let guests=document.getElementById("resGuests").value;
+if(!name||!phone||!date||!time||!guests){alert("Please fill all fields.");return;}
+let message=`Hello OISHII, I would like to reserve a table.%0A
+Name: ${name}%0A
+Phone: ${phone}%0A
+Date: ${date}%0A
+Time: ${time}%0A
+Guests: ${guests}`;
+window.open("https://wa.me/916033091243?text="+message,"_blank");
+}
+
+function toggleDark(){document.body.classList.toggle("dark");}
+
+function createPetal(){
+let petal=document.createElement("div");
+petal.classList.add("sakura");
+petal.innerHTML="🌸";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(Math.random()*5+5)+"s";
+document.body.appendChild(petal);
+setTimeout(()=>petal.remove(),10000);
+}
+setInterval(createPetal,700);
+
+/* OPEN/CLOSED STATUS + Auto Disable Reserve Button */
+function checkRestaurantStatus(){
+const now=new Date();
+const day=now.getDay();
+const time=now.getHours()*60 + now.getMinutes();
+const open = 10*60 + 30;
+const close = 20*60 + 30;
+const status = document.getElementById("status");
+const btn = document.querySelector("header button");
+
+if(day === 0){
+status.innerHTML = "❌ Closed Today (Sunday)";
+status.style.color = "red";
+btn.disabled = true;
+btn.style.opacity = "0.6";
+return;
+}
+if(time >= open && time <= close){
+status.innerHTML = "🟢 Open Now";
+status.style.color = "lightgreen";
+btn.disabled = false;
+btn.style.opacity = "1";
+} else {
+status.innerHTML = "❌ Closed Now (10:30 AM – 8:30 PM)";
+status.style.color = "red";
+btn.disabled = true;
+btn.style.opacity = "0.6";
+}
+}
+
+checkRestaurantStatus();
+setInterval(checkRestaurantStatus,60000);
+</script>
+
+</body>
+</html>
